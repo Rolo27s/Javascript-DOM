@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Control de nodos</title>
     </head>
+    <style>
+        :root {
+            --yellow-color: #F7DF1E;
+            --dark-color: #222;
+        }
+    </style>
     <body>
         <h1>Control de nodos</h1>
         <nav id="menu">
@@ -17,7 +23,7 @@
             </ul>
         </nav>
         <input type="text" name="nombre" placeholder="nombre" />
-        <a class="link-dom" href="index.html">DOM</a>
+        <a class="link-dom" style="background-color: #F7DF1E; color:#222;" href="index.html" data-description="Document Object Model" data-id="1">DOM</a>
         <section class="cards">
             <figure class="card">
                 <img src="https://picsum.photos/200/200" alt="Random" />
@@ -41,5 +47,7 @@
             </figure>
         </section>
         <script src="code1.js"></script>
+        <script src="code2.js"></script>
+        <script src="code3.js"></script>
     </body>
 </html>
