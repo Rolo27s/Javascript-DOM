@@ -1,0 +1,16 @@
+h2 {
+    width: 2000px;
+    padding: 2rem;
+    background-color: rgb(156, 123, 13);
+    text-align: center;
+}
+
+.botonera {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.botonera * {
+    margin: 0.25rem;
+}
