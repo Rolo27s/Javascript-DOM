@@ -10,6 +10,38 @@
             --yellow-color: #F7DF1E;
             --dark-color: #222;
         }
+
+        .cards {
+            border: thin solid black;
+            padding: 1.5rem;
+        }
+
+        .card {
+            display: inline-block;
+            background-color: var(--dark-color);
+            color: var(--yellow-color);
+        }
+
+        .card figcaption {
+            padding: 1rem;
+        }
+
+        .rotate-45 {
+            transform: rotate(45deg);
+        }
+
+        .rotate-135 {
+            transform: rotate(135deg);
+        }
+
+        .opacity-80 {
+            opacity: 0.8;
+        }
+
+        .sepia {
+            filter: sepia(1);
+        }
+
     </style>
     <body>
         <h1>Control de nodos</h1>
@@ -46,8 +78,30 @@
                 <figcaption>Barrel</figcaption>
             </figure>
         </section>
+        <h3>Manejo del DOM</h3>
+        <p id="que-es">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore atque quae necessitatibus optio animi laborum deserunt iure consequuntur accusamus enim? Nobis exercitationem itaque quam ex magni reprehenderit atque cumque sit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos vitae quas dolorem veniam, at ratione vero molestias incidunt. Pariatur debitis nostrum qui nihil unde mollitia corrupti similique. Voluptatem, sunt officia.
+        </p>
+        <div id="final-node-1"></div>
+        <div id="final-node-2"></div>
+
+        <!-- Uso de template -->
+        <!-- El template no se renderiza. Es como una clase que funciona tipo plantilla -->
+        <template id="template-card">
+            <figure class="card">
+                <img>
+                <figcaption></figcaption>
+            </figure>
+        </template>
+
         <script src="code1.js"></script>
         <script src="code2.js"></script>
         <script src="code3.js"></script>
+        <script src="code4.js"></script>
+        <script src="code5.js"></script>
+        <script src="code6.js" type="module"></script>
+        <script src="code7.js" type="module"></script>
+        <script src="code8.js"></script>
+        <script src="code9.js"></script>
     </body>
 </html>

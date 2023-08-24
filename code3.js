@@ -19,6 +19,6 @@ $body.style.backgroundColor = varDarkColor;
 $body.style.color = varYellowColor;
 
 // Para modificar algun color
-$html.style.setProperty("--dark-color", "#000");
+$html.style.setProperty("--dark-color", "#666");
 varDarkColor = getComputedStyle($html).getPropertyValue("--dark-color");
 $body.style.setProperty("background-color", varDarkColor);
