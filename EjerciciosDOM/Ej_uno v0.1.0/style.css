@@ -1,0 +1,107 @@
+/* ScrollBar personalizada */
+/* --------------------------------- */
+::-webkit-scrollbar{
+	width: 10px;
+}
+
+::-webkit-scrollbar-track-piece{
+	background-color: #EEE;
+}
+
+::-webkit-scrollbar-thumb{
+	background-color: #CBCBCB;
+	outline: 1px solid rgba(189, 189, 189, 0.5);
+	outline-offset: -2px;
+	border: .1px solid #B7B7B7;
+}
+
+::-webkit-scrollbar-thumb:hover{
+	background-color: #909090;
+}
+/* --------------------------------- */
+
+* {
+    font-family: 'Nunito Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+h1 {
+    padding: 1rem;
+    background-color: rgb(255, 196, 0);
+    color: #222;
+    text-align: center;
+    border-bottom: 1px solid #000;
+}
+
+button.hamburger {
+    position: fixed;
+    top: 8px;
+    left: 10px;
+    background-color: rgba(119, 116, 71, 0.7);
+    border-radius: 16px;
+}
+
+body {
+    background-color: #e7e4b9;
+}
+
+article {
+    margin: 0.25rem 10rem;
+    background-color: #c8ebe9;
+    border: 2px solid #222;
+}
+
+section {
+    border-bottom: 2px solid #222;
+    padding: 1rem;
+    background-color: rgb(149, 230, 255);
+    font-weight: 600;
+}
+
+section:not(:first-child) {
+    border-top: 2px solid #222;
+}
+
+.menu {
+    position: fixed;
+    top: 8px;
+    left: 84px;
+    background-color: rgb(70, 67, 38);
+    border-radius: 10px;
+    outline: 2px solid #111;
+}
+
+ul {
+    padding: 0.5rem;
+    list-style: none;
+}
+
+li {
+    padding: 1rem;
+    border-top: 1px dashed #eee;
+    color: #eee;
+}
+
+li:last-child {
+    border-bottom: 1px dashed #eee;
+}
+
+.hide {
+    display: none;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(255, 145, 0);
+}
+
+a:active {
+    color: rgb(196, 10, 10);
+}
