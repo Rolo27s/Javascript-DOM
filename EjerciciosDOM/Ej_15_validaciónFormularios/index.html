@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../personalMicroReset.css" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Validación de formulario</title>
+    </head>
+    <body>
+        <h1>Validación de formulario</h1>
+        <form class="contact-form" action="https://formsubmit.co/fr4n.mlg@gmail.com" method="POST" target="_blank">
+            <legend>Envíanos tus comentarios</legend>
+            <input
+                type="text"
+                placeholder="Escribe tu nombre"
+                name="name"
+                title="Nombre solo acepta letras y espacios en blanco"
+                required
+                pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$"
+            />
+            <input
+                type="email"
+                name="email"
+                placeholder="Escribe tu email"
+                title="Email incorrecto"
+                pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$"
+                required
+            />
+            <input type="text" name="subject" placeholder="Asunto a tratar" title="El asunto es requerido" required />
+            <textarea
+                name="comments"
+                placeholder="Escribe tus comentarios"
+                data-pattern="^.{1,255}$"
+                title="Tu comentario no debe exceder los 255 caracteres"
+                cols="50"
+                rows="5"
+                required
+            ></textarea>
+
+            <input type="submit" value="Enviar" />
+
+            <div class="contact-form-loader none">
+                <img src="oval.svg" alt="Cargando" srcset="tail-spin.svg" />
+            </div>
+
+            <div class="contact-form-response none">
+                <p>Los datos han sido enviados</p>
+            </div>
+        </form>
+    </body>
+    <script src="code.js"></script>
+</html>

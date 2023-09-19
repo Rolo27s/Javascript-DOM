@@ -1,0 +1,71 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 400px;
+    padding: 1rem;
+    gap: 0.2rem;
+}
+
+input, textarea{
+    padding-left: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.1rem;
+    resize: none;
+}
+
+.contact-form-loader {
+    background-color: #222;
+    opacity: 0.8;
+    text-align: center;
+    padding: 1rem;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+.contact-form [required]:valid {
+    border: 2px solid green;
+}
+
+/* Esta línea de CSS me gustaría hacerlo desde JS y poner la condicional que el input no esté vacío. De este modo, al principio del formulario los bordes serán negros */
+/* .contact-form [required]:invalid {
+    border: 2px solid red;
+} */
+
+/* Cosas dinámicas desde JS */
+.contact-form-error {
+    padding: 0.2rem 1rem;
+    font-size: 80%;
+    background-color: red;
+    color: white;
+    transition: all 800ms ease;
+}
+
+.contact-form-error.is-active {
+    display: block;
+    animation: show-message 1s 1 normal 0s ease-out both;
+}
+
+.none {
+    display: none;
+}
+
+@keyframes show-message {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}

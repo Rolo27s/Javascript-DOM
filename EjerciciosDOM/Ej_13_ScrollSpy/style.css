@@ -1,0 +1,147 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+    background: linear-gradient(#ebc000 90%, #111);
+    padding: 3rem;
+    text-align: center;
+    color: #eee;
+}
+
+ul.portada {
+    margin-left: 2rem;
+    padding: 0.25rem;
+    list-style: none;
+}
+
+ul.portada li {
+    display: flex;
+    align-items: center;
+}
+
+ul.portada li::before {
+    content: "•";
+    color: red;
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 26px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    transition: margin 0.3s ease;
+}
+
+body {
+    background-color: #eee;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+a {
+    color: #eee;
+    text-decoration: none;
+}
+
+h2 {
+    margin: 1rem;
+}
+
+figure {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+section {
+    margin: 2rem;
+}
+
+h4 {
+    margin-top: 1rem;
+    color: #333;
+}
+
+footer {
+    background-color: #222;
+    color: #eee;
+    padding: 1rem;
+    text-align: center;
+}
+
+.panel {
+    visibility: hidden;
+    display: none;
+    background-color: #222;
+    color: #ebc000;
+    padding: 0.75rem;
+}
+
+@media (width >= 1024px) {
+    body {
+        display: grid;
+        grid-template-columns: 80% 20%;
+        grid-template-rows: auto;
+        grid-template-areas: 
+            "header header"
+            "main   panel"
+            "footer footer";
+    }
+
+    main {
+        grid-area: main;
+    }
+
+    header {
+        grid-area: header;
+    }
+
+    .panel {
+        visibility: visible;
+        display: block;
+        opacity: 0.9;
+        grid-area: panel;
+        position: fixed;
+        top: 8.6rem;
+        left: 80%;
+        z-index: 100;
+        justify-content: center;
+        align-self:flex-start;
+        height: 100vh;
+        width: 20%; /* Este 20% coincide con el width del grid */
+    }
+
+    .panel ul li:hover,
+    .panel ul li.active {
+        color: #fdf9e7;
+        background-color: #c5a907;
+        cursor: pointer;
+        font-weight: 700;
+        margin-left: 0.5rem;
+    }
+
+    img {
+        width: 100%;
+        margin: 0 auto;
+        padding: 1rem 4rem 4rem 4rem;
+    }
+
+    footer {
+        grid-area: footer;
+    }
+}

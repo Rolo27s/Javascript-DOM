@@ -1,0 +1,74 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+    background-color: #ebc000;
+    padding: 3rem;
+    text-align: center;
+    color: #eee;
+}
+
+ul {
+    list-style: none;  
+}
+
+div {
+    padding: 2rem;
+    line-height: 2rem;
+}
+
+body {
+    background-color: #eee;
+}
+
+/* Search filters */
+.card-filter-content {
+    display: flex;
+    justify-content: center;
+    background-color: #ddd;
+    box-shadow: 0 0 5px #777;
+}
+
+.card-filter {
+    padding: 1rem;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 1rem;
+    justify-items: center;
+    gap: 1rem;
+}
+
+.card {
+    background-color: rgba(116, 92, 14, 0.85);
+    color: #eee;
+    transition: all 0.3s ease;
+    border-radius: 1rem;
+    border: 1px solid #222;
+    box-shadow: 5px 5px 5px #aaa;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.card figcaption {
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Clase que aplicaremos dinámicamente según el filtro */
+.filter {
+    /* display: none; */
+    visibility: hidden;
+    opacity: 0;
+    order: 1;
+}

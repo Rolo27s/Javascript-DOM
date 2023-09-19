@@ -1,0 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+    background-color: #ebc000;
+    padding: 3rem;
+    text-align: center;
+    color: #eee;
+}
+
+ul {
+    list-style: none;  
+}
+
+div {
+    padding: 2rem;
+    line-height: 2rem;
+}
+
+/* ****** NETWORK STATUS ****** */
+.online, .offline {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    background-color: #039e18;
+    color: #eee;
+}
+
+.offline {
+    background-color: #f11;
+}
