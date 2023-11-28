@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Simulator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div id="resultContainer"></div>
+    <div id="winnerCardContainer"></div>
+    <script>
+        function generateBingoCard() {
+            const arrayCard = [];
+            for (let i = 0; i < 20; i++) {
+                let number = Math.floor(Math.random() * 90) + 1;
+
+                // Control the non repeatable number
+                while (arrayCard.includes(number)) {
+                    number = Math.floor(Math.random() * 90) + 1;
+                }
+
+                arrayCard.push(number);
+            }
+
+            // Sort the array
+            arrayCard.sort((a, b) => a - b);
+
+            const card = [
+                [arrayCard[0], arrayCard[1], null, arrayCard[2]],
+                [null, arrayCard[3], arrayCard[4], null],
+                [arrayCard[5], null, null, arrayCard[6]],
+                [null, arrayCard[7], arrayCard[8], null],
+                [arrayCard[9], arrayCard[10], null, arrayCard[11]],
+                [null, arrayCard[12], arrayCard[13], null],
+                [arrayCard[14], null, arrayCard[15], arrayCard[16]],
+                [arrayCard[17], null, arrayCard[18], arrayCard[19]],
+            ];
+
+            return card;
+        }
+
+        function drawBall(drawnNumbers) {
+            let number;
+            
+            do {
+                number = Math.floor(Math.random() * 90) + 1;
+            } while (drawnNumbers.includes(number));
+
+            drawnNumbers.push(number);
+            return number;
+        }
+
+
+        function playBingo() {
+            // Always 5 players
+            const cards = Array.from({ length: 5 }, generateBingoCard);
+            let drawnNumbers = [];
+            let winnerCardIndex = -1;
+
+            while (winnerCardIndex === -1) {
+                const drawnNumber = drawBall(drawnNumbers);
+                // Other existing code...
+
+                // For each player
+                for (let i = 0; i < cards.length; i++) {
+                    const card = cards[i];
+                    const isWinner = checkBingo(card, drawnNumbers);
+
+                    if (isWinner) {
+                        winnerCardIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            return {
+                winnerCardIndex: winnerCardIndex,
+                drawnNumbers: drawnNumbers,
+                cards: cards // Include cards in the result
+            };
+        }
+
+        function checkBingo(card, drawnNumbers) {
+            const numbersInCard = card.flat().filter(number => number !== null);
+
+            return numbersInCard.every(number => drawnNumbers.includes(number));
+        }
+
+
+        // Example usage:
+        const result = playBingo();
+
+        // Display the result in the DOM
+        const resultContainer = document.getElementById('resultContainer');
+        resultContainer.innerHTML = `
+            <div>Winner Card Index: ${result.winnerCardIndex + 1}</div>
+            <div>Drawn Numbers: ${result.drawnNumbers.join(', ')}</div>
+        `;
+
+        // Display the winning card in a 4x8 table
+        const winnerCardContainer = document.getElementById('winnerCardContainer');
+        winnerCardContainer.innerHTML = `<h2>Winner Card</h2>`;
+        winnerCardContainer.appendChild(createTable(result.cards[result.winnerCardIndex]));
+
+        function createTable(card) {
+            const table = document.createElement('table');
+
+            for (let i = 0; i < 4; i++) {
+                const row = table.insertRow();
+
+                for (let j = 0; j < 8; j++) {
+                    const cell = row.insertCell();
+                    cell.textContent = card[j][i] !== null ? card[j][i] : ''; // Display numbers or empty string for null values
+                }
+            }
+
+            return table;
+        }
+    </script>
+</body>
+</html>

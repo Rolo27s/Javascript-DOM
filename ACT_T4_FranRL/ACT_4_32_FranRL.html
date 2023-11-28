@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Comparison</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="resultContainer"></div>
+    <script>
+        function haveSameLetters(word1, word2) {
+            // Convert words to lowercase for case-insensitive comparison
+            const lowerWord1 = word1.toLowerCase();
+            const lowerWord2 = word2.toLowerCase();
+
+            // Sort the characters of the words and compare
+            const sortedWord1 = lowerWord1.split('').sort().join('');
+            const sortedWord2 = lowerWord2.split('').sort().join('');
+
+            return sortedWord1 === sortedWord2;
+        }
+
+        // Example usage:
+        const result = haveSameLetters('smash', 'hasms');
+
+        // Display the result in the DOM
+        const resultContainer = document.getElementById('resultContainer');
+        resultContainer.innerHTML = `
+            <div>Do the words have the same letters? ${result ? 'Yes' : 'No'}</div>
+        `;
+    </script>
+    
+</body>
+</html>

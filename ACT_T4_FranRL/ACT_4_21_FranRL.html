@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ACT_4_21_FranRL.html</title>
+    </head>
+    <body>
+      <form action="" method="post">
+        <fieldset>
+          <legend>Convert Fahrenheit to Celsius</legend>
+          <label for="Fahrenheit">Fahrenheit degrees</label>
+          <input type="text" name="Fahrenheit" id="Fahrenheit" pattern="\d+(\.\d{1,2})?" title="Ingrese un número decimal válido (hasta 2 decimales)" required>
+          <input type="submit" value="Convert to Celsius" id="convert">
+        </fieldset>
+      </form>
+      <div>
+        <p id="response"></p>
+      </div>
+    </body>
+    <!-- Create a function that return Celsius from Fahrenheit degrees -->
+    <script>
+      const response = document.getElementById("response");
+      const btn = document.getElementById("convert");
+      
+      
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const degreesF = document.getElementById("Fahrenheit").value;
+        const degreesC = (parseFloat(degreesF) - 32) * (5 / 9);
+        response.textContent = `Celsius degrees: ${degreesC.toFixed(2)}`;
+
+        // Function to cover requirements
+        function F_to_C(degreesF) {
+          const degreesC = (parseFloat(degreesF) - 32) * (5 / 9);
+          console.log(`Fahrenheit: ${degreesF} - Celsius: ${degreesC.toFixed(2)}`);
+          return degreesC;
+        }
+        F_to_C(degreesF);
+      });
+    </script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Alphabet Filter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="resultContainer"></div>
+    <script>
+        function filterSpanishAlphabet(words) {
+            // Define the Spanish alphabet
+            const spanishAlphabet = 'abcdefghijklmnopqrstuvwxyzáéíóúüñ';
+
+            // Use the filter method to keep only characters in the Spanish alphabet
+            const filteredCharacters = words
+                .join('') // Join the words into a single string
+                .split('') // Split the string into an array of characters
+                .filter(char => spanishAlphabet.includes(char.toLowerCase())); // If char is included in the Spanish alphabet then return true and the char is keeping into the original string
+
+            return filteredCharacters;
+        }
+
+        // Example usage:
+        const wordsArray = ['hello', '^', 'world', '$', 'ñandú', '&', 'españa'];
+
+        // Display the result in the DOM
+        const resultContainer = document.getElementById('resultContainer');
+        resultContainer.innerHTML = `
+            <div>Filtered Characters: ${filterSpanishAlphabet(wordsArray).join(', ')}</div>
+        `;
+    </script>
+</body>
+</html>

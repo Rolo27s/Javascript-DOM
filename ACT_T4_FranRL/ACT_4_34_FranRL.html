@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci Variant</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="resultContainer"></div>
+    <script>
+        function fibonacciVariant(n) {
+            if (n <= 0) {
+                return [];
+            } else if (n === 1) {
+                return [0];
+            } else if (n === 2) {
+                return [0, 1];
+            } else {
+                // Calculate the sequence for n - 1
+                const sequence = fibonacciVariant(n - 1);
+
+                // Get the length of the sequence
+                const len = sequence.length;
+
+                // Calculate the sum based on the length of the sequence
+                let sum;
+                if (len >= 3) {
+                    // If there are at least three elements in the sequence, sum the last three elements
+                    sum = sequence[len - 1] + sequence[len - 2] + sequence[len - 3];
+                } else {
+                    // If there are less than three elements, sum the last element
+                    sum = sequence[len - 1];
+                }
+
+                // Add the calculated sum to the sequence
+                sequence.push(sum);
+
+                // Return the updated sequence
+                return sequence;
+            }
+        }
+
+        // Example usage:
+        const result = fibonacciVariant(10);
+
+        // Display the result in the DOM
+        const resultContainer = document.getElementById('resultContainer');
+        resultContainer.innerHTML = `
+            <div>Fibonacci Variant Sequence: ${result.join(', ')}</div>
+        `;
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ACT_4_25_FranRL.html</title>
+    </head>
+    <body></body>
+    <script>
+        const DNI = prompt("Insert your DNI (format: 12345678A)");
+
+        function returnLetter(dni) {
+            // The correct form to control the input is with a regular expression, but this small control should be enough to test the function
+            if (dni.length == 9 && dni[8] >= 'A' && dni[8] <= 'Z') {
+                alert(`The DNI letter is ${dni[8]}`);
+                return dni[8];
+            } else {
+                alert("Invalid DNI");
+                return -1; // Error return
+            }
+        }
+        returnLetter(DNI);
+    </script>
+</html>

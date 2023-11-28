@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ACT_4_28_FranRL.html</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+
+        td {
+            border: 1px solid black;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="tableContainer"></div>
+
+    <script>
+        // Function with 2 arrays 4x4 and returns 1 array with conditions
+        const array1 = [[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]];
+        const array2 = [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]];
+
+        function makeArray3(array1, array2) {
+            const array3 = new Array(array1.length);
+
+            for (let i = 0; i < array1.length; i++) {
+                array3[i] = new Array(array1[i].length);
+
+                for (let j = 0; j < array1[i].length; j++) {
+                    if (array1[i][j] === array2[i][j]) {
+                        array3[i][j] = array1[i][j];
+                    } else {
+                        array3[i][j] = 0;
+                    }
+                }
+            }
+
+            // Display array3 in the DOM
+            displayArrayInDOM(array3);
+            
+            // Return the array3
+            return array3;
+        }
+
+        function displayArrayInDOM(array) {
+            const tableContainer = document.getElementById('tableContainer');
+            const table = document.createElement('table');
+
+            for (let i = 0; i < array.length; i++) {
+                const row = document.createElement('tr');
+
+                for (let j = 0; j < array[i].length; j++) {
+                    const cell = document.createElement('td');
+                    cell.textContent = array[i][j];
+                    row.appendChild(cell);
+                }
+
+                table.appendChild(row);
+            }
+
+            // Append the table to the container
+            tableContainer.appendChild(table);
+        }
+
+        makeArray3(array1, array2);
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Array Sorter</title>
+</head>
+<body>
+    <script>
+        function fillAndSortArray(arr) {
+            // Fill the array with random numbers between 1 and 100
+            for (let i = 0; i < arr.length; i++) {
+                arr[i] = Math.floor(Math.random() * 100) + 1;
+            }
+
+            // Sort the array, with numbers ending in 0 appearing first
+            arr.sort((a, b) => {
+                // Numbers ending in 0 come first
+                if (a % 10 === 0 && b % 10 !== 0) {
+                    return -1; // If a ends with 0 and b does not, return -1. This means a should come before b.
+                } else if (a % 10 !== 0 && b % 10 === 0) {
+                    return 1; // If a does not end with 0 and b ends with 0, return 1. This means a should come after b.
+                }
+                // For other cases, sort in ascending order
+                return a - b; // If neither of the above conditions is met, it returns a - b. This ensures that in all other cases, the array is sorted in ascending order.
+            });
+
+            return arr;
+        }
+
+        // Example: Create an array, fill and sort it
+        const myArray = new Array(10);
+        const sortedArray = fillAndSortArray(myArray);
+
+        // Display the sorted array with alert
+        alert('Sorted Array:\n' + sortedArray.join(', '));
+    </script>
+</body>
+</html>

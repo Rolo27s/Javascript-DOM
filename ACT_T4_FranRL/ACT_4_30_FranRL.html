@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Number Checker</title>
+</head>
+<body>
+    <script>
+        function isPrime(number) {
+            if (number < 2) {
+                return false;
+            }
+
+            for (let i = 2; i <= Math.sqrt(number); i++) {
+                if (number % i === 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Example usage:
+        const testNumber = prompt("Enter a number");
+        const isPrimeResult = isPrime(testNumber);
+
+        // Display the result using an alert
+        if (isPrimeResult) {
+            alert(`${testNumber} is a prime number.`);
+        } else {
+            alert(`${testNumber} is not a prime number.`);
+        }
+    </script>
+</body>
+</html>

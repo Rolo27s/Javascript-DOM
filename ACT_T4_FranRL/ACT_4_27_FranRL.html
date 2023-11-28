@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ACT_4_27_FranRL.html</title>
+    </head>
+    <body>
+        <p id="auto1"></p>
+        <p id="auto2"></p>
+    </body>
+    <script>
+        (function auto() {
+            const text1 = document.getElementById('auto1');
+            text1.innerHTML = 'Comenzando...';
+            setTimeout(function() {
+                const text2 = document.getElementById('auto2');
+                text2.innerHTML = 'Finalizado.';
+            }, 3000);
+        })();
+    </script>
+</html>

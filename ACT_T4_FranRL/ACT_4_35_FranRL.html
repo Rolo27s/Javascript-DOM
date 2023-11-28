@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Rolling Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="resultContainer"></div>
+    <script>
+        function rollDice(numRolls) {
+            let maxScore = 0;
+            let winningRoll = [];
+
+            for (let i = 0; i < numRolls; i++) {
+                // Simulate rolling two dice
+                const die1 = Math.floor(Math.random() * 6) + 1;
+                const die2 = Math.floor(Math.random() * 6) + 1;
+
+                // Calculate the total score
+                const totalScore = die1 + die2;
+
+                // Check if the current roll has a higher score
+                if (totalScore > maxScore) {
+                    maxScore = totalScore;
+                    winningRoll = [die1, die2];
+                }
+            }
+
+            return winningRoll;
+        }
+
+        // Example usage: Roll the dice 4 times
+        const result = rollDice(4);
+
+        // Display the result in the DOM
+        const resultContainer = document.getElementById('resultContainer');
+        resultContainer.innerHTML = `
+            <div>Winning Roll: ${result.join(' + ')}</div>
+            <div>Total Score: ${result.reduce((sum, value) => sum + value, 0)}</div>
+        `;
+    </script>
+</body>
+</html>

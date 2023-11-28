@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ACT_4_24_FranRL.html</title>
+    </head>
+    <body>
+        <div id="table"></div>
+    </body>
+    <script>
+        const number = prompt("Insert a number to calculate the multiplication table");
+
+        function Table(number) {
+            const table = document.getElementById("table");
+            const fragment = document.createDocumentFragment();
+            for (let i = 0; i <= 10; i++) {
+                let result = number * i;
+                rowResult = `${number} x ${i} = ${result}`;
+
+                const content = document.createTextNode(rowResult);
+                fragment.appendChild(content);
+                fragment.appendChild(document.createElement("br"));
+            }
+            table.appendChild(fragment);
+        }
+        Table(number);
+    </script>
+</html>

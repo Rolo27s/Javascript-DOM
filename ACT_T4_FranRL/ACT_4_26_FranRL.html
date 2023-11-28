@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ACT_4_26_FranRL.html</title>
+    </head>
+    <body>
+        <form action="">
+            <fieldset>
+                <legend>Matrix 3x3</legend>
+                <input type="number" name="n1" id="n1" required>
+                <input type="number" name="n2" id="n2" required>
+                <input type="number" name="n3" id="n3" required>
+                <input type="number" name="n4" id="n4" required>
+                <input type="number" name="n5" id="n5" required>
+                <input type="number" name="n6" id="n6" required>
+                <input type="number" name="n7" id="n7" required>
+                <input type="number" name="n8" id="n8" required>
+                <input type="number" name="n9" id="n9" required>
+                <input type="submit" value="Enter" id="Enter">
+            </fieldset>
+        </form>
+        <h2 id="textResult"></h2>
+        <div id="result"></div>
+    </body>
+    <!-- JAVASCRIPT -->
+    <script>
+        // The parameter is a 3x3 matrix (array) and returns another matrix (array)
+        function resetMatrix(matrix) {
+            console.log(`Input matrix: ${matrix}`);
+
+            // Make a fragment to not overload the DOM
+            const fragment = document.createDocumentFragment();
+
+            // My last DOM zone to insert the fragment
+            const result = document.getElementById("result");
+
+            const textResult = document.getElementById("textResult");
+            const solution = document.createTextNode('Solution');
+            textResult.appendChild(solution);
+
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    if (i == j) {
+                        // No modifications because this is the principal diagonal
+                        const number = document.createTextNode(matrix[i][j]);
+                        fragment.appendChild(number);
+                    } else {
+                        matrix[i][j] = 0;
+                        const number = document.createTextNode(0);
+                        fragment.appendChild(number);
+                    }
+                }
+                const nextLine = document.createElement("br");
+                fragment.appendChild(nextLine);
+            }
+            console.log(`Output matrix: ${matrix}`);
+
+            // Add the fragment into the DOM
+            result.appendChild(fragment);
+
+            return matrix;
+        }
+
+        // I need to do an event that convert the form into an array and then execute the resetMatrix function.
+        const button = document.getElementById('Enter');
+        button.addEventListener('click', (e) => {
+            // I do not want that form is submitted
+            e.preventDefault();
+
+            const n1 = document.getElementById('n1').value;
+            const n2 = document.getElementById('n2').value;
+            const n3 = document.getElementById('n3').value;
+            const n4 = document.getElementById('n4').value;
+            const n5 = document.getElementById('n5').value;
+            const n6 = document.getElementById('n6').value;
+            const n7 = document.getElementById('n7').value;
+            const n8 = document.getElementById('n8').value;
+            const n9 = document.getElementById('n9').value;
+
+            const myMatrix = [[n1, n2, n3], [n4, n5, n6], [n7, n8, n9]];
+            resetMatrix(myMatrix);
+        });
+    </script>
+    <!-- CSS -->
+    <style>
+        fieldset {
+            border: none;
+            display:grid;
+            grid-template-columns: repeat(3, 80px);
+            gap: 2px;
+        }
+
+        #Enter, legend {
+            grid-column: 1/4;
+        }
+
+        #result {
+            margin-left: 2rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 2rem;
+        }
+
+        h2 {
+            margin-left: 2rem;
+        }
+    </style>
+</html>

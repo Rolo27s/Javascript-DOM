@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Operations</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="resultsContainer"></div>
+    <script>
+        function performMathOperations(...numbers) {
+            // Check if at least four parameters are provided
+            if (numbers.length < 4) {
+                alert("Please provide at least four numerical parameters.");
+                return -1;
+            }
+
+            // Calculate sum
+            const sum = numbers.reduce((acc, num) => acc + num, 0);
+            /* 
+            numbers: This is an array of numerical values that you want to sum.
+
+            reduce method: This is a higher-order function available in JavaScript. It's used to iterate over the elements of an array and accumulate a result.
+
+            Arrow Function: (acc, num) => acc + num is an arrow function passed to reduce. It takes two parameters:
+
+            acc: The accumulator, which accumulates the sum of the array elements.
+            num: The current array element being processed.
+            The arrow function adds the current array element (num) to the accumulator (acc).
+
+            Initial Value (0): The second argument to reduce is the initial value of the accumulator (acc). In this case, it starts with 0.
+            */
+
+            // Calculate arithmetic mean
+            const mean = sum / numbers.length;
+
+            // Calculate multiplication of the first with the last
+            const multiplication = numbers[0] * numbers[numbers.length - 1];
+
+            // Calculate division of the second with the second to last
+            const division = numbers[1] / numbers[numbers.length - 2];
+
+            // Display results in the DOM
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = `
+                <div>Sum: ${sum}</div>
+                <div>Arithmetic Mean: ${mean}</div>
+                <div>Multiplication of First with Last: ${multiplication}</div>
+                <div>Division of Second with Second to Last: ${division}</div>
+            `;
+        }
+
+        // Example usage:
+        performMathOperations(10, 5, 8, 2);
+
+    </script>
+</body>
+</html>
