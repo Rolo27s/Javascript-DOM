@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			class Aula {
+				constructor(idAula, planta, aforoMax) {
+					this.idAula = idAula;
+					this.planta = planta;
+					this.aforoMax = aforoMax;
+				}
+
+				toString() {
+					let newDiv = document.createElement("div");
+					newDiv.textContent = `El aula con id ${this.idAula} esta en la planta ${this.planta} y tiene un aforo maximo de ${this.aforoMax} personas`;
+					document.body.insertAdjacentElement("beforeend", newDiv);
+				}
+			}
+
+			let aula1 = new Aula(1, "baja", 34);
+			aula1.toString();
+
+			class Musica extends Aula {
+				constructor(idAula, planta, aforoMax, tipoInstrumento) {
+					super(idAula, planta, aforoMax);
+					this.tipoInstrumento = tipoInstrumento;
+				}
+
+				toString() {
+					let newDiv = document.createElement("div");
+					newDiv.textContent = `El aula de MUSICA con id ${this.idAula} esta en la ${this.planta} planta, con aforo maximo de ${this.aforoMax} personas y con tipo de instrumento musical: ${this.tipoInstrumento}`;
+					document.body.insertAdjacentElement("beforeend", newDiv);
+				}
+			}
+
+			let musica1 = new Musica(2, "segunda", 12, "tuba");
+			musica1.toString();
+
+			class Tecnologia extends Aula {
+				constructor(idAula, planta, aforoMax, numeroDePCs) {
+					super(idAula, planta, aforoMax);
+					this.numeroDePCs = numeroDePCs;
+				}
+
+				toString() {
+					let newDiv = document.createElement("div");
+					newDiv.textContent = `El aula de TECNOLOGIA con id ${this.idAula} esta en la ${this.planta} planta, con aforo maximo de ${this.aforoMax} personas y con ${this.numeroDePCs} ordenadores disponibles`;
+					document.body.insertAdjacentElement("beforeend", newDiv);
+				}
+			}
+
+			let tecnologia1 = new Tecnologia(3, "segunda", 12, 6);
+			tecnologia1.toString();
+		</script>
+	</body>
+</html>

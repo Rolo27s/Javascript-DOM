@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades de aplicacion Tema 6</title>
+</head>
+<body>
+    <h1>Francisco José Rodríguez López</h1>
+    <div id="reference"></div>
+    <script>
+        function setCookie(name, value, minutes) {
+            const expirationDate = new Date();
+            expirationDate.setTime(expirationDate.getTime() + (minutes * 60 * 1000)); // Agrego minutos al momento actual.
+            const expires = "expires=" + expirationDate.toUTCString(); // convierto a cadena y compongo el texto completo con la informacion de expiración
+            document.cookie = name + "=" + value + ";" + expires + ";path=/"; // path=/ indica que la cookie es válida para todo el dominio web.
+        }
+
+        const nombre = prompt("Ingresa tu nombre:");
+        const edad = prompt("Ingresa tu edad:");
+
+        setCookie("usuario_nombre", nombre, 30); // Cookie para el nombre con 30 minutos de caducidad
+        setCookie("usuario_edad", edad, 30);   // Cookie para la edad con 30 minutos de caducidad
+    </script>
+</body>
+</html>

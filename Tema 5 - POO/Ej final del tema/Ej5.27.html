@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de clases</title>
+</head>
+<body>
+    <div id="reference"></div>
+    <script>
+        const regexPrecioEuros = /^\d{1,}(?:[.,]\d{2})? €$/;
+        /* 
+        ^: Representa el inicio de la cadena.
+        \d{1,}: Coincide con uno o más dígitos enteros.
+        (?:[.,]\d{2})?: Utiliza un grupo no capturador (?: ... ) que permite la presencia opcional de un punto o coma como separador decimal, seguido de exactamente dos dígitos decimales.
+        : Un espacio en blanco.
+        €: El símbolo del euro.
+        $: Representa el final de la cadena.
+        */
+        // Ejemplo de uso
+        const precio1 = "10.50 €";
+        const precio2 = "15,75 €";
+        const precio3 = "8 €";
+        const precio4 = "parmesano"
+
+        console.log(regexPrecioEuros.test(precio1));  // true
+        console.log(regexPrecioEuros.test(precio2));  // true
+        console.log(regexPrecioEuros.test(precio3));  // true
+        console.log(regexPrecioEuros.test(precio4));  // false
+    </script>
+</body>
+</html>

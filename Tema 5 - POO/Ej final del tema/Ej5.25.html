@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de clases</title>
+</head>
+<body>
+    <div id="reference"></div>
+    <script>
+        const operacionesFechas = {
+            // Método para calcular la diferencia en días entre dos fechas
+            difFechas: function(fecha1, fecha2) {
+                const diffMilisegundos = Math.abs(new Date(fecha2) - new Date(fecha1));
+                return Math.floor(diffMilisegundos / (1000 * 60 * 60 * 24));
+            },
+
+            // Método para obtener la fecha más reciente entre dos fechas
+            maxFecha: function(fecha1, fecha2) {
+                return new Date(fecha1) > new Date(fecha2) ? fecha1 : fecha2;
+            },
+
+            // Método para comprobar si el formato de una fecha es correcto
+            testFecha: function(fecha) {
+                return !isNaN(new Date(fecha).getTime());
+            },
+
+            // Método para obtener el día anterior a una fecha
+            ayerFecha: function(fecha) {
+                const yesterday = new Date(new Date(fecha).getTime() - 24 * 60 * 60 * 1000);
+                return yesterday.toISOString().split('T')[0];
+                // toISOString() convierte esta fecha a una cadena en formato ISO, que tiene la forma de 'YYYY-MM-DDTHH:mm:ss.sssZ'. Por ejemplo, '2022-01-09T00:00:00.000Z' para el día anterior al 10 de enero de 2022.
+                // .split('T'): La cadena resultante se divide en un array utilizando 'T' como separador. Esto divide la cadena en dos partes: la fecha ('YYYY-MM-DD') y la hora ('HH:mm:ss.sssZ'). En este caso, estamos interesados en la primera parte, que es la fecha.
+                // [0]: Se accede al primer elemento del array resultante después de la división, que contiene la fecha. Esto se hace con [0].
+            },
+
+            // Método para obtener el día posterior a una fecha
+            mananaFecha: function(fecha) {
+                const tomorrow = new Date(new Date(fecha).getTime() + 24 * 60 * 60 * 1000);
+                return tomorrow.toISOString().split('T')[0];
+            }
+        };
+
+        // Ejemplos de uso
+        console.log(operacionesFechas.difFechas('2022-01-01', '2022-01-10')); // Ejemplo de diferencia en días
+        console.log(operacionesFechas.maxFecha('2022-01-01', '2022-01-10')); // Ejemplo de fecha más reciente
+        console.log(operacionesFechas.testFecha('2022-01-01')); // Ejemplo de comprobación de formato de fecha
+        console.log(operacionesFechas.ayerFecha('2022-01-10')); // Ejemplo de obtener el día anterior
+        console.log(operacionesFechas.mananaFecha('2022-01-10')); // Ejemplo de obtener el día posterior
+    </script>
+</body>
+</html>

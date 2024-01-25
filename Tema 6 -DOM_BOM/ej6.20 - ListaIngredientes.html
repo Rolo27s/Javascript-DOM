@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades de aplicacion Tema 6</title>
+</head>
+<body>
+    <h1>Francisco José Rodríguez López</h1>
+    <br />
+    <span>Lista desordenada</span>
+    <br />
+    <ul id="reference"></ul>
+    <script>
+        let miLista = [];
+        let salida = 1;
+        while (salida != null) {
+            salida = prompt("Añade un ingrediente a la lista: ");
+            if (salida != null) {
+                miLista.push(salida);
+            }
+        }
+        console.log(salida);
+        console.log(miLista);
+
+        const listaDesordenada = document.getElementById("reference");
+        miLista.forEach(element => {
+            const myLi = document.createElement("li");
+            myLi.textContent = element;
+            listaDesordenada.appendChild(myLi);
+        });
+    </script>
+</body>
+</html>

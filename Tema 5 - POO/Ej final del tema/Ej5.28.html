@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de clases</title>
+</head>
+<body>
+    <div id="reference"></div>
+    <script>
+        const regexFormatoHora = /^([01]\d|2[0-3]):[0-5]\d$/;
+        /* 
+            ^: Representa el inicio de la cadena.
+            ([01]\d|2[0-3]): Este grupo de captura permite que las horas estén en el rango de 00 a 23. Se divide en dos partes:
+            [01]\d: Las horas que comienzan con 0 o 1, seguido por un dígito.
+            2[0-3]: Las horas que comienzan con 2, seguido por un dígito en el rango de 0 a 3.
+            :: El carácter de dos puntos que separa las horas y los minutos.
+            [0-5]\d: Los minutos, donde el primer dígito puede ser 0, 1, 2, 3, 4 o 5, y el segundo dígito puede ser cualquier dígito.
+            $: Representa el final de la cadena.
+        */
+        // Ejemplo de uso
+        const hora1 = "08:30";
+        const hora2 = "15:45";
+        const hora3 = "21:00";
+        const hora4 = "23:44:45";
+
+        console.log(regexFormatoHora.test(hora1));  // true
+        console.log(regexFormatoHora.test(hora2));  // true
+        console.log(regexFormatoHora.test(hora3));  // true
+        console.log(regexFormatoHora.test(hora4));  // false
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de clases</title>
+</head>
+<body>
+    <div id="reference"></div>
+    <script>
+        const regexLetrasCastellano = /^[A-Za-zÁáÉéÍíÓóÚúÜüÑñ]+$/u;
+
+        // Ejemplo de uso1
+        const texto1 = "HolaMundoÁéÍñ";
+        if (regexLetrasCastellano.test(texto1)) {
+            console.log("La cadena es válida.");
+        } else {
+            console.log("La cadena no es válida.");
+        }
+
+        // Ejemplo de uso2
+        const texto2 = "Hola que tal. No es válido porque tiene espacios.";
+        if (regexLetrasCastellano.test(texto2)) {
+            console.log("La cadena es válida.");
+        } else {
+            console.log("La cadena no es válida.");
+        }
+    </script>
+</body>
+</html>

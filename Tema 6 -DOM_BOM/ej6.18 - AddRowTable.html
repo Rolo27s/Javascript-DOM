@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades de aplicacion Tema 6</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Francisco José Rodríguez López</h1>
+    <h2>Tabla Dinámica</h2>
+    <div id="reference"></div>
+
+    <table id="miTabla">
+        <thead>
+            <tr>
+                <th>Columna 1</th>
+                <th>Columna 2</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        </tbody>
+    </table>
+
+    <button onclick="agregarFila()">Agregar Fila</button>
+
+    <script>
+        function agregarFila() {
+            const tabla = document.getElementById("miTabla").getElementsByTagName('tbody')[0];
+            const nuevaFila = tabla.insertRow(tabla.rows.length);
+
+            // Añadir celdas a la nueva fila
+            const celda1 = nuevaFila.insertCell(0);
+            const celda2 = nuevaFila.insertCell(1);
+
+            // Puedes personalizar el contenido de las celdas aquí
+            celda1.innerHTML = "Nuevo Valor 1";
+            celda2.innerHTML = "Nuevo Valor 2";
+        }
+    </script>
+</body>
+</html>

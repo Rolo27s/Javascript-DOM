@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades de aplicacion Tema 6</title>
+</head>
+<body>
+    <h1>Francisco José Rodríguez López</h1>
+    <div id="reference">
+        <p>Parrafo 1</p>
+        <p>Parrafo 2</p>
+        <p>Parrafo 3</p>
+        <p>Parrafo 4</p>
+        <a href="#Top">Link 1</a>
+        <br />
+        <span>Span 1</span>
+        <span>Span 2</span>
+        <div>Div 1</div>
+        <b>Resaltado 1</b>
+    </div>
+    <script>
+        const ref = document.getElementById("reference");
+
+        // Contadores iniciales
+        let contadorParrafos = 0;
+        let contadorEnlaces = 0;
+        let contadorSpans = 0;
+        let total = 0;
+
+        // Obtener todos los elementos dentro del div#reference
+        const elementos = ref.childNodes;
+
+        // Iterar sobre los elementos para contar
+        elementos.forEach(elemento => {
+            if (elemento.tagName === "P") {
+                contadorParrafos++;
+                total++;
+            } else if (elemento.tagName === "A") {
+                contadorEnlaces++;
+                total++;
+            } else if (elemento.tagName === "SPAN") {
+                contadorSpans++;
+                total++;
+            }
+        });
+
+        // Mostrar los resultados
+        console.log("Número de párrafos:", contadorParrafos);
+        console.log("Número de enlaces:", contadorEnlaces);
+        console.log("Número de spans:", contadorSpans);
+        console.log("Numero total de a, p y span:", total);
+
+    </script>
+</body>
+</html>

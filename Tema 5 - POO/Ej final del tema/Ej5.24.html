@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de clases</title>
+</head>
+<body>
+    <div id="reference"></div>
+    <script>
+        // Define la clase Pelicula
+        class Pelicula {
+            constructor(jsonData) {
+                // Parsea la cadena JSON para obtener los datos
+                const data = JSON.parse(jsonData);
+
+                // Inicializa las propiedades de la película
+                this.nombre = data.nombre || '';
+                this.anoEstreno = data.anoEstreno || null;
+                this.duracion = data.duracion || null;
+                this.genero = data.genero || '';
+                this.actoresPrincipales = data.actoresPrincipales || [];
+                this.urlCartel = data.urlCartel || '';
+                this.director = data.director || '';
+            }
+
+            // Método para mostrar toda la información de la película
+            mostrarInformacion() {
+                console.log(`Nombre: ${this.nombre}`);
+                console.log(`Año de Estreno: ${this.anoEstreno}`);
+                console.log(`Duración: ${this.duracion}`);
+                console.log(`Género: ${this.genero}`);
+                console.log('Actores Principales:');
+                this.actoresPrincipales.forEach((actor, index) => {
+                    console.log(`  ${index + 1}. ${actor}`);
+                });
+                console.log(`URL del Cartel: ${this.urlCartel}`);
+                console.log(`Director: ${this.director}`);
+                console.log('--------------------------');
+            }
+        }
+
+        const datosPelicula = '{"nombre": "Inception", "anoEstreno": 2010, "duracion": 148, "genero": "Sci-Fi", "actoresPrincipales": ["Leonardo DiCaprio", "Ellen Page", "Joseph Gordon-Levitt"], "urlCartel": "https://1.bp.blogspot.com/-rOnPGT4DWnM/UlW7RfymSpI/AAAAAAAAE2I/bhMMoy8Dduw/s640/Inception.jpg", "director": "Christopher Nolan"}';
+
+        const pelicula = new Pelicula(datosPelicula);
+        pelicula.mostrarInformacion();
+    </script>
+</body>
+</html>

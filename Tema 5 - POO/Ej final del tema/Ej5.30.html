@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de clases</title>
+</head>
+<body>
+    <div id="reference"></div>
+    <script>
+        function escapeHTML(text) {
+        const replacements = [
+            ["&", "&amp;"],
+            ['"', "&quot;"],
+            ["<", "&lt;"],
+            [">", "&gt;"]
+        ];
+
+        replacements.forEach(replace => {
+            const regex = new RegExp(replace[0], 'g');
+            text = text.replace(regex, replace[1]);
+        });
+
+        return text;
+    }
+
+    // Ejemplo de uso
+    const originalText = 'This is <b>bold</b> & "quoted" text.';
+    const escapedText = escapeHTML(originalText);
+
+    console.log('Texto Original:');
+    console.log(originalText);
+
+    console.log('\nTexto Escapado:');
+    console.log(escapedText);
+    </script>
+</body>
+</html>

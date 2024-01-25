@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bingo Game</title>
+		<style>
+			/* Estilos básicos para la tabla y celdas */
+			table,
+			th,
+			td {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+			th,
+			td {
+				padding: 5px;
+				text-align: center;
+			}
+			/* Estilo para destacar los números seleccionados */
+			.selected {
+				background-color: yellow;
+			}
+			/* Estilos para mostrar los cartones en línea */
+			#cards {
+				display: flex;
+				justify-content: space-around;
+				flex-wrap: wrap;
+			}
+			/* Estilo para cada cartón individual */
+			.card {
+				margin: 10px;
+			}
+
+			#numbersTable {
+				margin-top: 20px;
+				width: 100%;
+				text-align: center;
+			}
+			.numberCell {
+				width: 30px;
+				height: 30px;
+				display: inline-block;
+				border: 1px solid black;
+				line-height: 30px;
+			}
+			.selectedNumber {
+				background-color: lightgreen;
+			}
+
+			#controls {
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Bingo Game</h1>
+		<div id="controls">
+			<button id="startGame">Iniciar Juego</button>
+			<button id="drawNumber" style="display: none">Sacar Número</button>
+			<button id="completeGame" style="display: none">Completar Juego</button>
+			<button id="resetGame" style="display: none">Reiniciar Juego</button>
+			<button id="pauseGame" style="display: none">Pausar Juego</button>
+			<button id="resumeGame" style="display: none">Continuar Juego</button>
+		</div>
+
+		<div id="numbersTable"></div>
+		<div id="cards"></div>
+		<!-- Sección para mostrar el resultado del juego -->
+		<div id="result"></div>
+		<script>
+			let cards = [];
+			let selectedNumbers = [];
+			let bingo = false;
+			let gamePaused = false;
+			let availableNumbers = [];
+			let completeGameInterval;
+
+			function getRandomNumber(min, max) {
+				if (availableNumbers.length === 0) {
+					for (let i = min; i <= max; i++) {
+						availableNumbers.push(i);
+					}
+				}
+				let randomIndex = Math.floor(Math.random() * availableNumbers.length);
+				return availableNumbers.splice(randomIndex, 1)[0];
+			}
+
+			function generateBingoCard() {
+				let card = [];
+				for (let i = 0; i < 8; i++) {
+					let row = [];
+					while (row.length < 5) {
+						let num = getRandomNumber(1, 90);
+						if (!row.some((cell) => cell.number === num)) {
+							row.push({ number: num, selected: false });
+						}
+					}
+					card.push(row);
+				}
+				return card;
+			}
+
+			function generateAllCards() {
+				let cards = [];
+				for (let i = 0; i < 5; i++) {
+					cards.push(generateBingoCard());
+				}
+				return cards;
+			}
+
+			function displayCards(cards) {
+				let cardsDiv = document.getElementById("cards");
+				cardsDiv.innerHTML = "";
+				cards.forEach((card, index) => {
+					let cardElement = document.createElement("div");
+					cardElement.innerHTML = `<h3>Cartón ${index + 1}</h3>`;
+					let table = document.createElement("table");
+					card.forEach((row) => {
+						let tr = document.createElement("tr");
+						for (let i = 0; i < 4; i++) {
+							let td = document.createElement("td");
+							td.textContent = row[i] ? row[i].number : "";
+							if (row[i] && row[i].selected) {
+								td.classList.add("selected");
+							}
+							tr.appendChild(td);
+						}
+						table.appendChild(tr);
+					});
+					cardElement.appendChild(table);
+					cardsDiv.appendChild(cardElement);
+				});
+			}
+
+			function selectNumber(cards) {
+				let number = getRandomNumber(1, 90);
+				cards.forEach((card) => {
+					card.forEach((row) => {
+						row.forEach((cell) => {
+							if (cell.number === number) {
+								cell.selected = true;
+							}
+						});
+					});
+				});
+				return number;
+			}
+
+			function checkForBingo(cards) {
+				return cards.some((card) =>
+					card.every((row) =>
+						row.filter((cell) => cell).every((cell) => cell.selected)
+					)
+				);
+			}
+
+			function startGame() {
+				cards = generateAllCards();
+				selectedNumbers = [];
+				bingo = false;
+				gamePaused = false;
+				displayCards(cards);
+				createNumbersTable();
+				document.getElementById("drawNumber").style.display = "block";
+				document.getElementById("completeGame").style.display = "block";
+				document.getElementById("resetGame").style.display = "block";
+				document.getElementById("pauseGame").style.display = "block";
+				document.getElementById("startGame").style.display = "none";
+				availableNumbers = [];
+			}
+
+			function drawNumber() {
+				if (bingo || gamePaused) return;
+
+				let number = selectNumber(cards);
+				selectedNumbers.push(number);
+				displayCards(cards);
+				updateNumbersTable(number);
+
+				bingo = checkForBingo(cards);
+
+				if (bingo) {
+					let resultDiv = document.getElementById("result");
+					resultDiv.innerHTML = `<p>Bingo!</p>`;
+					document.getElementById("drawNumber").style.display = "none";
+				}
+			}
+
+			function createNumbersTable() {
+				let table = document.getElementById("numbersTable");
+				table.innerHTML = "";
+				for (let i = 1; i <= 90; i++) {
+					let cell = document.createElement("div");
+					cell.classList.add("numberCell");
+					cell.textContent = i;
+					cell.id = "number-" + i;
+					table.appendChild(cell);
+				}
+			}
+
+			function updateNumbersTable(number) {
+				let cell = document.getElementById("number-" + number);
+				if (cell) {
+					cell.classList.add("selectedNumber");
+				}
+			}
+
+			function completeGame() {
+				if (bingo || gamePaused) return;
+
+				completeGameInterval = setInterval(() => {
+					if (bingo || gamePaused) {
+						clearInterval(completeGameInterval);
+						return;
+					}
+
+					drawNumber();
+				}, 500); // Intervalo de 500ms entre cada número
+			}
+
+			function resetGame() {
+				cards = [];
+				selectedNumbers = [];
+				bingo = false;
+				gamePaused = false;
+				availableNumbers = [];
+				document.getElementById("drawNumber").style.display = "none";
+				document.getElementById("completeGame").style.display = "none";
+				document.getElementById("resetGame").style.display = "none";
+				document.getElementById("pauseGame").style.display = "none";
+				document.getElementById("resumeGame").style.display = "none";
+				document.getElementById("startGame").style.display = "block";
+				document.getElementById("result").innerHTML = "";
+				document.getElementById("numbersTable").innerHTML = "";
+				document.getElementById("cards").innerHTML = "";
+				startGame(); // Iniciar un nuevo juego automáticamente
+			}
+
+			function pauseGame() {
+				gamePaused = true;
+				clearInterval(completeGameInterval); // Detener el juego completo
+				document.getElementById("drawNumber").style.display = "none";
+				document.getElementById("completeGame").style.display = "none";
+				document.getElementById("resetGame").style.display = "block";
+				document.getElementById("pauseGame").style.display = "none";
+				document.getElementById("resumeGame").style.display = "block";
+			}
+
+			function resumeGame() {
+				gamePaused = false;
+				document.getElementById("drawNumber").style.display = "block";
+				document.getElementById("completeGame").style.display = "block";
+				document.getElementById("resetGame").style.display = "block";
+				document.getElementById("pauseGame").style.display = "block";
+				document.getElementById("resumeGame").style.display = "none";
+				completeGame(); // Reanudar el juego completo
+			}
+
+			document.getElementById("startGame").addEventListener("click", startGame);
+			document
+				.getElementById("drawNumber")
+				.addEventListener("click", drawNumber);
+			document
+				.getElementById("completeGame")
+				.addEventListener("click", completeGame);
+			document.getElementById("resetGame").addEventListener("click", resetGame);
+			document.getElementById("pauseGame").addEventListener("click", pauseGame);
+			document
+				.getElementById("resumeGame")
+				.addEventListener("click", resumeGame);
+		</script>
+	</body>
+</html>

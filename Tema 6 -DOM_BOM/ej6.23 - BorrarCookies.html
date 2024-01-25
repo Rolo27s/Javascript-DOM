@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades de aplicacion Tema 6</title>
+</head>
+<body>
+    <h1>Francisco José Rodríguez López</h1>
+    <div id="reference"></div>
+    <script>
+        function eliminarCookies() {
+            // Obtener todas las cookies
+            const cookies = document.cookie.split(";");
+
+            // Recorrer todas las cookies y eliminarlas una por una
+            cookies.forEach(cookie => {
+                const partes = cookie.split("=");
+                const nombreCookie = partes[0].trim();
+                document.cookie = nombreCookie + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Sobreescribo a una fecha pasada para borrar
+            });
+
+            console.log("Cookies eliminadas");
+        }
+
+        // Ejecutar la función cada 10 segundos
+        setInterval(eliminarCookies, 10000);
+
+        // El ejercicio 6.22 genera dos cookies que se pueden eliminar con este ejercicio 6.23. Tener en cuenta que esta pensado para que se borren cada 10 segundos y los 10 primeros segundos no se ejecutará y no se borrará nada hasta que se ejecute.
+    </script>
+</body>
+</html>

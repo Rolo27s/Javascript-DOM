@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			class Telefono {
+				constructor(id, numero) {
+					this.id = id;
+					this.numero = numero;
+				}
+
+				toString() {
+					let newDiv = document.createElement("div");
+					newDiv.textContent = `ID del numero: ${this.id}, numero: ${this.numero}`;
+					document.body.insertAdjacentElement("beforeend", newDiv);
+				}
+			}
+
+			let telf1 = new Telefono("1", "606868236");
+			telf1.toString();
+
+			class Fijo extends Telefono {
+				constructor(id, numero, OLT) {
+					super(id, numero);
+					this.OLT = OLT;
+				}
+
+				toString() {
+					let newDiv = document.createElement("div");
+					newDiv.textContent = `ID del numero: ${this.id}, numero: ${this.numero}, numero de terminal de linea optica: ${this.OLT}`;
+					document.body.insertAdjacentElement("beforeend", newDiv);
+				}
+			}
+
+			let fijo1 = new Fijo("2", "952445566", 87);
+			fijo1.toString();
+
+			class Movil extends Telefono {
+				constructor(id, numero, tipoConexion) {
+					super(id, numero);
+					this.tipoConexion = tipoConexion;
+				}
+
+				toString() {
+					let newDiv = document.createElement("div");
+					newDiv.textContent = `ID del numero: ${this.id}, numero: ${this.numero}, tipo de conexion: ${this.tipoConexion}`;
+					document.body.insertAdjacentElement("beforeend", newDiv);
+				}
+			}
+
+			let movil1 = new Movil("3", "656221454", "5G");
+			movil1.toString();
+		</script>
+	</body>
+</html>

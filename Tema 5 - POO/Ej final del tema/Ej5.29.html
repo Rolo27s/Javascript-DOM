@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de clases</title>
+</head>
+<body>
+    <div id="reference"></div>
+    <script>
+        const regexURL = /^https:\/\/[^ñ\s]*\.es$/;
+
+        /* 
+        ^https:\/\/: La cadena debe comenzar con "https://".
+        [^ñ\s]*: Utiliza una clase de caracteres negada ([^...]) para indicar que se permiten cualquier carácter que no sea la letra "ñ" ni espacios en blanco. El cuantificador * indica que este conjunto de caracteres puede aparecer cero o más veces.
+        \.: Un punto literal después del dominio.
+        es$: La cadena debe terminar con ".es".
+        */
+
+        // Ejemplo de uso
+        const url1 = "https://propostal.es";
+        const url2 = "https://recatombe.es";
+        const url3 = "https://almidon.com";
+        const url4 = "https://ñapas.es";
+
+        console.log(regexURL.test(url1));  // true
+        console.log(regexURL.test(url2));  // true
+        console.log(regexURL.test(url3));  // false
+        console.log(regexURL.test(url4));  // false
+
+    </script>
+</body>
+</html>

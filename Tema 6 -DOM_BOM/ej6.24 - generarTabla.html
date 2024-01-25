@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades de aplicacion Tema 6</title>
+</head>
+<body>
+    <h1>Francisco José Rodríguez López</h1>
+    <div id="reference"></div>
+    <script>
+        function generarTabla(filas, columnas) {
+            const tabla = document.createElement("table");
+
+            for (let i = 0; i < filas; i++) {
+                const fila = tabla.insertRow();
+                for (let j = 0; j < columnas; j++) {
+                    const celda = fila.insertCell();
+                    const numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+                    celda.textContent = numeroAleatorio;
+                }
+            }
+
+            // Añadir la tabla al elemento con el id "reference"
+            document.getElementById("reference").appendChild(tabla);
+
+            return tabla;
+        }
+
+        function contarFilasColumnas(tabla) {
+            const filas = tabla.rows.length;
+            const columnas = tabla.rows[0].cells.length;
+            console.log(`Se han detectado ${filas} filas y ${columnas} columnas.`);
+        }
+
+        const filasUsuario = prompt("Ingrese el número de filas:");
+        const columnasUsuario = prompt("Ingrese el número de columnas:");
+
+        const tablaGenerada = generarTabla(parseInt(filasUsuario), parseInt(columnasUsuario));
+        contarFilasColumnas(tablaGenerada);
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de clases</title>
+</head>
+<body>
+    <div id="reference"></div>
+    <script>
+        // Crea una clase donde se demuestre la utilidad del objeto this.
+
+        // Definir una clase llamada 'Person'
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            // Método para mostrar información de la persona
+            showInfo() {
+                // Utilizando 'this' para acceder a las propiedades de la instancia
+                console.log(`Nombre: ${this.name}, Edad: ${this.age}`);
+            }
+        }
+
+        // Crear instancias de la clase 'Person'
+        const person1 = new Person('Juan', 25);
+        const person2 = new Person('Maria', 30);
+
+        // Llamar al método 'showInfo' usando 'this'
+        person1.showInfo();
+        person2.showInfo();
+    </script>
+</body>
+</html>

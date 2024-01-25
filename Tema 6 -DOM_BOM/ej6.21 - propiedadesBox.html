@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades de aplicacion Tema 6</title>
+</head>
+<body>
+    <h1>Francisco José Rodríguez López</h1>
+    <div data-width="80" data-height="80" data-bordercolor="red" id="reference"></div>
+    <script>
+        const box = document.getElementById("reference");
+        const boxWidth = box.getAttribute("data-width");
+        const boxHeight = box.getAttribute("data-height");
+        const boxBorderColor = box.getAttribute("data-bordercolor");
+
+        let atributosData = box.dataset;
+        console.log(atributosData);
+
+        // Aplico los estilos
+        box.style.width = `${boxWidth}px`;
+        box.style.height = `${boxHeight}px`;
+        box.style.border = `2px solid ${boxBorderColor}`;
+        console.log(boxWidth, boxHeight, boxBorderColor);
+    </script>
+</body>
+</html>

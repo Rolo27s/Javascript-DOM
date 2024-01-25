@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades de aplicacion Tema 6</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        #content {
+            font-size: 36px;
+            line-height: 140px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Francisco José Rodríguez López</h1>
+    <div id="reference">
+        <div id="content">
+            <p>A los 10 segundos se bajará automáticamente hasta el final de la Web</p>
+            <br />
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, debitis dignissimos! Incidunt, eius facilis nisi labore voluptatem sapiente obcaecati. Exercitationem reiciendis sunt quod error? Minus consequatur autem voluptatibus dolor tempore. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias hic blanditiis eum nesciunt dignissimos porro! Voluptas deserunt exercitationem reiciendis amet facilis aliquid voluptatibus est, tenetur dolores itaque incidunt corporis necessitatibus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cum debitis deleniti impedit explicabo modi? Minus eligendi necessitatibus, error quasi dolore amet quis debitis ducimus, dolorem numquam repudiandae nihil labore? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti necessitatibus sed nobis alias tempore saepe, fugit nesciunt quod. Vel nisi ea aut animi dolore quibusdam tempore quos eligendi explicabo cumque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat possimus natus nemo harum tempora? Laborum dolore debitis dolor quaerat voluptate ut quas saepe? Quibusdam labore sit dignissimos veritatis a doloribus. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident totam minus magnam iusto? Veritatis asperiores autem magni ipsa! Debitis ea at ab et temporibus. Cum repellendus tenetur doloremque recusandae exercitationem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ullam pariatur tempore fugit sit laboriosam aperiam! Consequuntur, adipisci nemo eaque ex veritatis maxime magni at earum vel repudiandae. Libero, assumenda! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, odio omnis. Illum repellat odit excepturi, laborum reiciendis inventore obcaecati sed ad nam fugiat odio similique quisquam distinctio aliquid minima nulla?</p>
+        </div>
+    </div>
+    <script>
+        // Función para hacer scroll al final de la página después de 10 segundos
+        function scrollToBottom() {
+            setTimeout(function() {
+                window.scrollTo({
+                    top: document.body.scrollHeight, // scrollHeight es la altura total del contenido del body, por lo que irá hasta el final. El top determina que el desplazamiento será en vertical.
+                    behavior: 'smooth' // transición suave.
+                });
+            }, 10000);
+        }
+
+        // Evento que se dispara después de que la página se carga completamente
+        window.addEventListener('load', scrollToBottom);
+    </script>
+</body>
+</html>

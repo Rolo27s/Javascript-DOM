@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de clases</title>
+</head>
+<body>
+    <div id="reference"></div>
+    <script>
+        class Empleado {
+            constructor(id, name) {
+                this.id = id;
+                this.name = name;
+            }
+
+            toString() {
+                const myRef = document.getElementById("reference");
+                const newDiv = document.createElement("div");
+                newDiv.textContent = `Alumno con id ${this.id} y nombre ${this.name}`;
+                myRef.insertAdjacentElement("beforebegin", newDiv);
+            }
+
+            cambioNombre() {
+                const newName = prompt("Escribe tu nuevo nombre:");
+                if (newName != null)
+                    this.name = newName;
+                em1.toString();
+            }
+        }
+
+        const em1 = new Empleado(1, "Pedro");
+        em1.toString();
+        em1.cambioNombre();
+    </script>
+</body>
+</html>

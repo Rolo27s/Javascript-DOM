@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de clases</title>
+</head>
+<body>
+    <div id="reference"></div>
+    <script>
+        let myMatrix = new Object;
+
+        class Matriz {
+            constructor(nFilas, nColumnas, contenido) {
+                this.nFilas = nFilas;
+                this.nColumnas = nColumnas;
+                this.contenido = contenido;
+            }
+
+            // Toda la matriz con el mismo valor
+            inicializarMatriz(valor) {
+                const matrix = Array.from({ length: this.nFilas }, () => Array(this.nColumnas).fill(valor));
+                this.contenido = matrix;
+            }
+
+
+            // Nº aleatorios del 1 al 100
+            aleatoriaMatriz() {
+                const valoresAleatorios = [];
+                const matrix = Array.from({ length: this.nFilas }, () => Array(this.nColumnas));
+                
+                for(let i = 0; i < this.nFilas; i++) {
+                    for(let j = 0; j < this.nColumnas; j++) {
+                        let num = Math.floor(Math.random() * 100) + 1;
+                        matrix[i][j] = num;
+                        valoresAleatorios.push(num);
+                    }
+                }
+
+                this.contenido = matrix;
+            }
+
+
+            // La muestra por consola
+            verMatriz() {
+                const matrix = this.contenido; // Utiliza this.contenido en lugar de crear una nueva matriz
+
+                let verFila = "";
+
+                for(let i = 0; i < this.nFilas; i++) {
+                    verFila = "";
+                    for(let j = 0; j < this.nColumnas; j++) {
+                        // console.log(matrix[i][j] + " ");
+                        verFila += " " + matrix[i][j];
+                    }
+                    console.log(verFila);
+                }
+            }
+
+        }
+        myMatrix = new Matriz(3,4);
+        myMatrix.inicializarMatriz(4);
+        myMatrix.verMatriz();
+        myMatrix.aleatoriaMatriz();
+        myMatrix.verMatriz();
+    </script>
+</body>
+</html>

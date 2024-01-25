@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de clases</title>
+</head>
+<body>
+    <div id="reference"></div>
+    <script>
+        // Define la clase Club
+        class Club {
+            constructor(anoFundacion = null, numSocios = null, nombreEstadio = null, ciudad = null, palmares = []) {
+                this.anoFundacion = anoFundacion;
+                this.numSocios = numSocios;
+                this.nombreEstadio = nombreEstadio;
+                this.ciudad = ciudad;
+                this.palmares = palmares;
+            }
+
+            // Método para mostrar toda la información del club
+            verClub() {
+                console.log(`Año de Fundación: ${this.anoFundacion}`);
+                console.log(`Número de Socios: ${this.numSocios}`);
+                console.log(`Nombre del Estadio: ${this.nombreEstadio}`);
+                console.log(`Ciudad: ${this.ciudad}`);
+                console.log('Palmarés:');
+                this.palmares.forEach(titulo => {
+                    console.log(`  - ${titulo.nombre}, Año de Consecución: ${titulo.ano}`);
+                });
+                console.log('--------------------------');
+            }
+        }
+
+        // Crea seis objetos de la clase Club
+        const club1 = new Club();
+        const club2 = new Club(1920);
+        const club3 = new Club(1930, 50000);
+        const club4 = new Club(1940, 75000, 'Estadio A');
+        const club5 = new Club(1950, 100000, 'Estadio B', 'Ciudad X');
+        const club6 = new Club(1960, 120000, 'Estadio C', 'Ciudad Y', [{ nombre: 'Liga', ano: 1970 }]);
+
+        // Muestra la información de cada club y realiza modificaciones
+        club1.verClub();
+        club1.anoFundacion = 1900;
+        club1.numSocios = 20000;
+        club1.verClub();
+
+        club2.verClub();
+        club2.palmares.push({ nombre: 'Copa', ano: 1925 });
+        club2.verClub();
+
+        club3.verClub();
+        club3.ciudad = 'Ciudad Z';
+        club3.verClub();
+
+        club4.verClub();
+        club4.nombreEstadio = 'Estadio D';
+        club4.verClub();
+
+        club5.verClub();
+        club5.palmares.push({ nombre: 'Champions', ano: 1965 });
+        club5.verClub();
+
+        club6.verClub();
+        club6.anoFundacion = 1955;
+        club6.verClub();
+    </script>
+</body>
+</html>

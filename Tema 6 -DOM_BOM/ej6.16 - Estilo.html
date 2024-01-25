@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades de aplicacion Tema 6</title>
+    <style>
+        .myStyle {
+            color: green;
+            text-decoration: underline;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <h1>Francisco José Rodríguez López</h1>
+    <div id="reference"></div>
+    <p id="parrafo">Parrafo de prueba</p>
+    <script>
+        const myP = document.getElementById("parrafo");
+        myP.classList.add("myStyle");
+
+        let estilos = getComputedStyle(myP);
+        console.log(estilos); // Muestras los estilos computados que son muchos
+
+        // Mostrar solo las propiedades aplicadas
+        for (let i = 0; i < estilos.length; i++) {
+            const propiedad = estilos[i];
+            const valor = estilos.getPropertyValue(propiedad);
+            console.log(`${propiedad}: ${valor}`);
+        }
+    </script>
+</body>
+</html>
