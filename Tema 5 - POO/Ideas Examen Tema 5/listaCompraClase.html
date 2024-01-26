@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Lista de la Compra</title>
+		<style>
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			th,
+			td {
+				border: 1px solid #ddd;
+				padding: 8px;
+				text-align: left;
+			}
+
+			th {
+				background-color: #f2f2f2;
+			}
+
+			form {
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Lista de la Compra</h1>
+
+		<table id="listaTable">
+			<tr>
+				<th>Producto</th>
+				<th>Cantidad</th>
+				<th>Precio</th>
+				<th>Categoría</th>
+				<th>Acciones</th>
+			</tr>
+		</table>
+
+		<form id="eliminarAtributoForm">
+			<label for="productoInput">Producto a eliminar:</label>
+			<input type="text" id="productoInput" name="productoInput" required />
+			<button
+				type="button"
+				onclick="listaDeCompras.eliminarProducto(); limpiarInputs();">
+				Eliminar Producto
+			</button>
+		</form>
+
+		<form id="agregarProductoForm">
+			<label for="nuevoProducto">Nuevo Producto:</label>
+			<input type="text" id="nuevoProducto" name="nuevoProducto" required />
+			<label for="nuevaCantidad">Cantidad:</label>
+			<input type="number" id="nuevaCantidad" name="nuevaCantidad" required />
+			<label for="nuevoPrecio">Precio:</label>
+			<input
+				type="number"
+				step="0.01"
+				id="nuevoPrecio"
+				name="nuevoPrecio"
+				required />
+			<label for="nuevaCategoria">Categoría:</label>
+			<input type="text" id="nuevaCategoria" name="nuevaCategoria" required />
+			<button
+				type="button"
+				onclick="listaDeCompras.agregarProducto(); limpiarInputs();">
+				Agregar Producto
+			</button>
+		</form>
+
+		<form id="modificarProductoForm">
+			<label for="modificarProducto">Modificar Producto:</label>
+			<input
+				type="text"
+				id="modificarProducto"
+				name="modificarProducto"
+				readonly />
+			<label for="modificarCantidad">Cantidad:</label>
+			<input
+				type="number"
+				id="modificarCantidad"
+				name="modificarCantidad"
+				required />
+			<label for="modificarPrecio">Precio:</label>
+			<input
+				type="number"
+				step="0.01"
+				id="modificarPrecio"
+				name="modificarPrecio"
+				required />
+			<label for="modificarCategoria">Categoría:</label>
+			<input
+				type="text"
+				id="modificarCategoria"
+				name="modificarCategoria"
+				required />
+			<button
+				type="button"
+				onclick="listaDeCompras.modificarProducto(); limpiarInputs();">
+				Modificar Producto
+			</button>
+		</form>
+
+		<script>
+			class ListaDeLaCompra {
+				constructor() {
+					this.listaDeCompras = [
+						new ListaDeCompraItem("Manzanas", 2, 1.5, "Frutas"),
+						new ListaDeCompraItem("Leche", 1, 2, "Lácteos"),
+						new ListaDeCompraItem("Pan", 3, 0.8, "Panadería"),
+						new ListaDeCompraItem("Yogur", 4, 1, "Lácteos"),
+						new ListaDeCompraItem("Tomates", 5, 0.5, "Verduras"),
+					];
+					this.actualizarTabla();
+				}
+
+				actualizarTabla() {
+					const table = document.getElementById("listaTable");
+					// Limpiar la tabla
+					table.innerHTML =
+						"<tr><th>Producto</th><th>Cantidad</th><th>Precio</th><th>Categoría</th><th>Acciones</th></tr>";
+
+					// Llenar la tabla con los objetos de la listaDeCompras. En este caso no se usa el index.
+					for (const listaItem of this.listaDeCompras) {
+						const row = table.insertRow(-1);
+						const cellProducto = row.insertCell(0);
+						const cellCantidad = row.insertCell(1);
+						const cellPrecio = row.insertCell(2);
+						const cellCategoria = row.insertCell(3);
+						const cellAcciones = row.insertCell(4);
+
+						cellProducto.textContent = listaItem.producto;
+						cellCantidad.textContent = listaItem.cantidad;
+						cellPrecio.textContent = listaItem.precio;
+						cellCategoria.textContent = listaItem.categoria;
+
+						const modificarButton = document.createElement("button");
+						modificarButton.textContent = "Modificar";
+						modificarButton.className = "btn btn-edit";
+						modificarButton.onclick = function () {
+							document.getElementById("modificarProducto").value =
+								listaItem.producto;
+							document.getElementById("modificarCantidad").value =
+								listaItem.cantidad;
+							document.getElementById("modificarPrecio").value =
+								listaItem.precio;
+							document.getElementById("modificarCategoria").value =
+								listaItem.categoria;
+						};
+
+						const eliminarButton = document.createElement("button");
+						eliminarButton.textContent = "Eliminar";
+						eliminarButton.className = "btn btn-delete";
+						eliminarButton.onclick = function () {
+							listaDeCompras.eliminarProducto(listaItem.producto);
+							limpiarInputs();
+						};
+
+						cellAcciones.appendChild(modificarButton);
+						cellAcciones.appendChild(eliminarButton);
+					}
+				}
+
+				eliminarProducto(productoEliminar) {
+					// Filtrar la listaDeCompras para excluir el producto a eliminar
+					const nuevaLista = this.listaDeCompras.filter(
+						(item) => item.producto !== productoEliminar // Si item es distinto que el producto a eliminar, guardalo en el nuevo array nuevaLista
+					);
+
+					// Verifica si se elimino algun producto
+					if (nuevaLista.length < this.listaDeCompras.length) {
+						this.listaDeCompras.length = 0; // Vacia el array listaDeCompras
+						Array.prototype.push.apply(this.listaDeCompras, nuevaLista); // rellena el array listaDeCompras con la info de nuevaLista
+						this.actualizarTabla();
+					} else {
+						alert("El producto no se encontró en la lista.");
+					}
+				}
+
+				agregarProducto() {
+					const nuevoProducto = document.getElementById("nuevoProducto").value;
+					const nuevaCantidad = parseInt(
+						document.getElementById("nuevaCantidad").value
+					);
+					const nuevoPrecio = parseFloat(
+						document.getElementById("nuevoPrecio").value
+					);
+					const nuevaCategoria =
+						document.getElementById("nuevaCategoria").value;
+
+					const nuevoItem = new ListaDeCompraItem(
+						nuevoProducto,
+						nuevaCantidad,
+						nuevoPrecio,
+						nuevaCategoria
+					);
+
+					this.listaDeCompras.push(nuevoItem);
+					this.actualizarTabla();
+				}
+
+				modificarProducto() {
+					const productoModificar =
+						document.getElementById("modificarProducto").value;
+
+					// Buscar el producto en la listaDeCompras
+					const productoExistente = this.listaDeCompras.find(
+						(item) => item.producto === productoModificar
+					);
+
+					if (productoExistente) {
+						// Actualizar los valores del producto existente
+						productoExistente.cantidad = parseInt(
+							document.getElementById("modificarCantidad").value
+						);
+						productoExistente.precio = parseFloat(
+							document.getElementById("modificarPrecio").value
+						);
+						productoExistente.categoria =
+							document.getElementById("modificarCategoria").value;
+
+						// Actualizar la tabla
+						this.actualizarTabla();
+					} else {
+						alert("El producto no se encontró en la lista.");
+					}
+				}
+			}
+
+			class ListaDeCompraItem {
+				constructor(producto, cantidad, precio, categoria) {
+					this.producto = producto;
+					this.cantidad = cantidad;
+					this.precio = precio;
+					this.categoria = categoria;
+				}
+			}
+
+			// Función para limpiar los campos de entrada
+			function limpiarInputs() {
+				document.getElementById("productoInput").value = "";
+				document.getElementById("nuevoProducto").value = "";
+				document.getElementById("nuevaCantidad").value = "";
+				document.getElementById("nuevoPrecio").value = "";
+				document.getElementById("nuevaCategoria").value = "";
+				document.getElementById("modificarProducto").value = "";
+				document.getElementById("modificarCantidad").value = "";
+				document.getElementById("modificarPrecio").value = "";
+				document.getElementById("modificarCategoria").value = "";
+			}
+
+			// Instancia de la clase ListaDeLaCompra
+			const listaDeCompras = new ListaDeLaCompra();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Calculadora de Edad</title>
+	</head>
+	<body>
+		<h1>Calculadora de Edad</h1>
+
+		<script>
+			class EdadUsuario {
+				constructor(fechaNacimiento) {
+					this.fechaNacimiento = fechaNacimiento;
+				}
+
+				calcularEdad() {
+					const fechaActual = new Date();
+					const anoNacimiento = this.fechaNacimiento.getFullYear();
+					const anoActual = fechaActual.getFullYear();
+					let edad = anoActual - anoNacimiento;
+
+					const mesActual = fechaActual.getMonth();
+					const mesNacimiento = this.fechaNacimiento.getMonth();
+
+					if (
+						mesActual < mesNacimiento ||
+						(mesActual === mesNacimiento &&
+							fechaActual.getDate() < this.fechaNacimiento.getDate())
+					) {
+						edad--;
+					}
+
+					return edad;
+				}
+			}
+
+			const fechaNacimientoUsuario = new Date("1989-09-22");
+			const usuario = new EdadUsuario(fechaNacimientoUsuario);
+
+			const edadCalculada = usuario.calcularEdad();
+
+			document.write(
+				`<p>Fecha de Nacimiento: ${fechaNacimientoUsuario.toLocaleDateString()}</p>`
+			);
+			document.write(`<p>Edad del usuario: ${edadCalculada} años</p>`);
+		</script>
+	</body>
+</html>

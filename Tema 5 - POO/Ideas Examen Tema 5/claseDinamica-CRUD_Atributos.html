@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CRUD de Atributos de Alumno</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				margin: 20px;
+			}
+
+			form {
+				margin-bottom: 20px;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			th,
+			td {
+				border: 1px solid #ddd;
+				padding: 8px;
+				text-align: left;
+			}
+
+			th {
+				background-color: #f2f2f2;
+			}
+
+			.btn {
+				padding: 8px;
+				cursor: pointer;
+			}
+
+			.btn-delete {
+				color: red;
+			}
+
+			.btn-edit {
+				color: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>CRUD de Atributos de Alumno</h1>
+
+		<form id="alumnoForm">
+			<label for="idInput">ID de la propiedad a instanciar:</label>
+			<input type="text" id="idInput" name="idInput" required />
+			<br />
+			<label for="nombreInput">Nombre de la clase:</label>
+			<input type="text" id="nombreInput" name="nombreInput" required />
+			<br />
+			<label for="atributoInput">Nombre del Atributo:</label>
+			<input type="text" id="atributoInput" name="atributoInput" required />
+			<br />
+			<label for="valorInput">Valor del Atributo:</label>
+			<input type="text" id="valorInput" name="valorInput" required />
+			<br />
+			<button type="button" onclick="crearOActualizarAtributo()">
+				Crear/Actualizar Atributo
+			</button>
+		</form>
+
+		<table id="alumnoTable">
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Atributo</th>
+				<th>Valor</th>
+				<th>Acciones</th>
+			</tr>
+		</table>
+
+		<script>
+			class Alumno {
+				constructor(attributes) {
+					attributes = attributes || {};
+					attributes.ID = attributes.ID || "";
+					attributes.nombre = attributes.nombre || "";
+					this.setAttribute("ID", attributes.ID);
+					this.setAttribute("nombre", attributes.nombre);
+				}
+
+				showAttributes() {
+					const attributes = {};
+					const keys = Object.getOwnPropertyNames(this);
+
+					for (const key of keys) {
+						attributes[key] = this.getAttribute(key);
+					}
+
+					return attributes;
+				}
+
+				setAttribute(key, value) {
+					if (key.startsWith("#")) {
+						this[key] = value;
+					} else {
+						this["#" + key] = value;
+					}
+				}
+
+				getAttribute(key) {
+					const propertyKey = key.startsWith("#") ? key : "#" + key;
+
+					if (propertyKey in this) {
+						return this[propertyKey];
+					} else {
+						console.error(
+							`La propiedad ${propertyKey} no existe en la instancia de Alumno.`
+						);
+						return undefined; // O puedes devolver un valor predeterminado según tus necesidades
+					}
+				}
+			}
+
+			function crearOActualizarAtributo() {
+				const id = document.getElementById("idInput").value;
+				const nombre = document.getElementById("nombreInput").value;
+				const atributo = document.getElementById("atributoInput").value;
+				const valor = document.getElementById("valorInput").value;
+
+				const table = document.getElementById("alumnoTable");
+
+				// Busca si ya existe una fila con el mismo ID y Atributo
+				let existingRow = null;
+				for (let i = 1; i < table.rows.length; i++) {
+					const row = table.rows[i];
+					if (
+						row.cells[0].textContent === id &&
+						row.cells[2].textContent === atributo
+					) {
+						existingRow = row;
+						break;
+					}
+				}
+
+				if (existingRow) {
+					// Si existe, actualiza los valores
+					existingRow.cells[3].textContent = valor;
+				} else {
+					// Si no existe, crea una nueva instancia de Alumno y muestra en la tabla
+					const alumno = new Alumno({ ID: id, nombre: nombre });
+					alumno.setAttribute(atributo, valor);
+					mostrarTabla(alumno);
+				}
+
+				// Limpiar el formulario
+				document.getElementById("idInput").value = "";
+				document.getElementById("nombreInput").value = "";
+				document.getElementById("atributoInput").value = "";
+				document.getElementById("valorInput").value = "";
+			}
+
+			function mostrarTabla(alumno) {
+				const table = document.getElementById("alumnoTable");
+				const row = table.insertRow(-1);
+
+				const cellID = row.insertCell(0);
+				const cellNombre = row.insertCell(1);
+				const cellAtributo = row.insertCell(2);
+				const cellValor = row.insertCell(3);
+				const cellAcciones = row.insertCell(4);
+
+				cellID.textContent = alumno.getAttribute("ID");
+				cellNombre.textContent = alumno.getAttribute("nombre");
+				cellAtributo.textContent = Object.keys(alumno.showAttributes())[2];
+				cellValor.textContent = alumno.getAttribute(
+					Object.keys(alumno.showAttributes())[2]
+				);
+
+				const editButton = document.createElement("button");
+				editButton.textContent = "Editar";
+				editButton.className = "btn btn-edit";
+				editButton.onclick = function () {
+					// Rellenar el formulario con los valores actuales
+					document.getElementById("idInput").value = alumno.getAttribute("ID");
+					document.getElementById("nombreInput").value =
+						alumno.getAttribute("nombre");
+					document.getElementById("atributoInput").value = Object.keys(
+						alumno.showAttributes()
+					)[2];
+					document.getElementById("valorInput").value = alumno.getAttribute(
+						Object.keys(alumno.showAttributes())[2]
+					);
+
+					// Eliminar la fila de la tabla
+					table.deleteRow(row.rowIndex);
+				};
+
+				const deleteButton = document.createElement("button");
+				deleteButton.textContent = "Eliminar";
+				deleteButton.className = "btn btn-delete";
+				deleteButton.onclick = function () {
+					// Eliminar la fila de la tabla
+					table.deleteRow(row.rowIndex);
+				};
+
+				cellAcciones.appendChild(editButton);
+				cellAcciones.appendChild(deleteButton);
+			}
+		</script>
+	</body>
+</html>

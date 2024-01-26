@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Conversor JSON</title>
+	</head>
+	<body>
+		<h1>Conversor JSON</h1>
+
+		<script>
+			// Clase que recibe un objeto en formato JSON
+			class ConvertidorJSON {
+				constructor(jsonString) {
+					this.objeto = jsonString; // No es necesario el JSON.parse aquí
+				}
+
+				// Método para convertir el objeto a String
+				convertirAString() {
+					return JSON.stringify(this.objeto);
+				}
+			}
+
+			// Clase que recibe un objeto en formato String
+			class ConvertidorString {
+				constructor(objeto) {
+					this.objetoString = objeto;
+				}
+
+				// Método para convertir el String a objeto JSON
+				convertirAJSON() {
+					return JSON.parse(this.objetoString);
+				}
+			}
+
+			// Ejemplo de uso
+			const objetoOriginal = {
+				nombre: "Juan",
+				edad: 30,
+				ciudad: "Barcelona",
+			};
+
+			// Convertir el objeto a String
+			const convertidorString = new ConvertidorString(
+				JSON.stringify(objetoOriginal)
+			);
+			const objetoConvertidoDesdeString = convertidorString.convertirAJSON();
+			console.log(
+				"Objeto convertido desde String:",
+				objetoConvertidoDesdeString
+			);
+
+			// Convertir el objeto JSON a String
+			const convertidorJSON = new ConvertidorJSON(objetoOriginal);
+			const objetoConvertidoAString = convertidorJSON.convertirAString();
+			console.log("Objeto convertido a String:", objetoConvertidoAString);
+		</script>
+	</body>
+</html>
