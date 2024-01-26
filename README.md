@@ -22,3 +22,16 @@ An explanation of the basic javascript APIs
 - Crear una clase que tenga parametros de entrada fecha de nacimiento y devuelva con un método la edad.
 - Crear un objeto con varias propiedades y luego añadir, eliminar y modificar algunas propiedades.
 - Usar estilo JSON to Object y al reves (parse y stringify)
+
+## Ver metodos nativos de objetos de JS
+- Object.getOwnPropertyNames(window);
+- Object.getOwnPropertyNames(window.location);
+- Object.getOwnPropertyNames(Array.prototype);
+
+Para guardar en un array las propiedades de location
+```javascript
+const metodosLocation = Object.getOwnPropertyNames(window.location)
+  .filter(propiedad => typeof window.location[propiedad] === 'function');
+
+console.log(metodosLocation);
+```
