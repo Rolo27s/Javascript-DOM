@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Carousel Horizontal</title>
+		<style>
+			#carouselContainer {
+				width: 300px;
+				height: 300px;
+				overflow: hidden;
+				position: relative;
+			}
+			#carouselTrack {
+				width: 1200px; /* 4 divs * 300px cada uno */
+				height: 100%;
+				display: flex;
+				transition: transform 0.5s ease;
+			}
+			.slide {
+				width: 300px;
+				height: 300px;
+				flex-shrink: 0;
+			}
+			.red {
+				background-color: red;
+			}
+			.black {
+				background-color: black;
+			}
+			.blue {
+				background-color: blue;
+			}
+			.yellow {
+				background-color: yellow;
+			}
+			#prevButton,
+			#nextButton {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				cursor: pointer;
+				background-color: rgba(0, 0, 0, 0.5);
+				color: white;
+				padding: 5px 10px;
+			}
+			#prevButton {
+				left: 10px;
+			}
+			#nextButton {
+				right: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="carouselContainer">
+			<div id="carouselTrack">
+				<div class="slide red"></div>
+				<div class="slide black"></div>
+				<div class="slide blue"></div>
+				<div class="slide yellow"></div>
+			</div>
+			<div id="prevButton">&lt;</div>
+			<div id="nextButton">&gt;</div>
+		</div>
+
+		<script>
+			var carouselTrack = document.getElementById("carouselTrack");
+			var slides = document.querySelectorAll(".slide");
+			var prevButton = document.getElementById("prevButton");
+			var nextButton = document.getElementById("nextButton");
+			var currentSlide = 0;
+			var slideWidth = slides[0].offsetWidth;
+			var timer;
+
+			function nextSlide() {
+				currentSlide++;
+				if (currentSlide >= slides.length) {
+					currentSlide = 0; // Vuelve al principio
+				}
+				updateCarousel();
+			}
+
+			function prevSlide() {
+				currentSlide--;
+				if (currentSlide < 0) {
+					currentSlide = slides.length - 1; // Vuelve al final
+				}
+				updateCarousel();
+			}
+
+			function updateCarousel() {
+				var offset = -currentSlide * slideWidth;
+				carouselTrack.style.transform = "translateX(" + offset + "px)";
+			}
+
+			function startAutoPlay() {
+				timer = setInterval(nextSlide, 5000);
+			}
+
+			function stopAutoPlay() {
+				clearInterval(timer);
+			}
+
+			prevButton.addEventListener("click", function () {
+				prevSlide();
+				stopAutoPlay();
+				startAutoPlay();
+			});
+
+			nextButton.addEventListener("click", function () {
+				nextSlide();
+				stopAutoPlay();
+				startAutoPlay();
+			});
+
+			startAutoPlay();
+		</script>
+	</body>
+</html>

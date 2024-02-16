@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Slider Horizontal</title>
+		<style>
+			#sliderContainer {
+				width: 300px;
+				height: 20px;
+				background-color: lightgray;
+				position: relative;
+				cursor: pointer;
+			}
+			#slider {
+				width: 100px;
+				height: 100%;
+				background-color: blue;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="sliderContainer">
+			<div id="slider"></div>
+		</div>
+
+		<script>
+			var slider = document.getElementById("slider");
+			var sliderContainer = document.getElementById("sliderContainer");
+			var isDragging = false;
+			var offset = 0;
+
+			slider.addEventListener("mousedown", function (event) {
+				isDragging = true;
+				offset = event.clientX - slider.offsetLeft;
+			});
+
+			document.addEventListener("mouseup", function () {
+				isDragging = false;
+			});
+
+			document.addEventListener("mousemove", function (event) {
+				if (isDragging) {
+					var newPosition = event.clientX - offset;
+					if (
+						newPosition >= 0 &&
+						newPosition <= sliderContainer.clientWidth - slider.clientWidth
+					) {
+						slider.style.left = newPosition + "px";
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

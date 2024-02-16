@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Encuesta</title>
+	</head>
+	<body>
+		<h1>Encuesta</h1>
+		<p>¿Estás de acuerdo con la propuesta?</p>
+		<button id="si">Sí</button>
+		<button id="no">No</button>
+		<p>
+			<span id="total-si">0</span>
+			votos a favor
+			<span id="total-no">0</span>
+			votos en contra
+		</p>
+		<button id="reiniciar">Reiniciar</button>
+
+		<script>
+			const totalSi = document.querySelector("#total-si");
+			const totalNo = document.querySelector("#total-no");
+			const btnSi = document.querySelector("#si");
+			const btnNo = document.querySelector("#no");
+			const btnReiniciar = document.querySelector("#reiniciar");
+
+			let votosSi = 0;
+			let votosNo = 0;
+
+			function actualizarTotales() {
+				totalSi.textContent = votosSi;
+				totalNo.textContent = votosNo;
+			}
+
+			btnSi.addEventListener("click", () => {
+				votosSi++;
+				actualizarTotales();
+			});
+
+			btnNo.addEventListener("click", () => {
+				votosNo++;
+				actualizarTotales();
+			});
+
+			btnReiniciar.addEventListener("click", () => {
+				votosSi = 0;
+				votosNo = 0;
+				actualizarTotales();
+			});
+
+			actualizarTotales();
+		</script>
+	</body>
+</html>

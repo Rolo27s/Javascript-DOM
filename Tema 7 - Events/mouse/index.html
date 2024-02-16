@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Eventos de Mouse en JavaScript</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				text-align: center;
+				padding-top: 50px;
+				background-color: #f0f0f0;
+			}
+			.container {
+				max-width: 600px;
+				margin: 0 auto;
+			}
+			#targetElement {
+				width: 200px;
+				height: 200px;
+				margin: 20px auto;
+				background-color: #007bff;
+				color: #fff;
+				line-height: 200px;
+				cursor: pointer;
+			}
+			#targetElement:hover {
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Eventos de Mouse en JavaScript</h1>
+			<p>
+				Haz clic en cualquier parte del documento para ver un mensaje en la
+				consola.
+			</p>
+			<div id="targetElement">Elemento objetivo</div>
+		</div>
+
+		<script>
+			// 1. Evento de clic en cualquier parte del documento
+			document.addEventListener("click", function () {
+				console.log("Clic realizado en el documento");
+			});
+
+			// 2. Evento de mover el mouse sobre un elemento
+			var targetElement = document.getElementById("targetElement");
+			targetElement.addEventListener("mouseover", function () {
+				targetElement.style.backgroundColor = "red";
+			});
+
+			// 3. Evento de retirar el mouse de un elemento
+			targetElement.addEventListener("mouseout", function () {
+				targetElement.style.backgroundColor = "#007bff"; // Restaura el color original
+			});
+		</script>
+	</body>
+</html>

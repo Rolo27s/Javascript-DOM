@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Examen de JavaScript - Eventos de Drag and Drop</title>
+		<style>
+			#draggable {
+				width: 100px;
+				height: 100px;
+				background-color: blue;
+				color: white;
+				text-align: center;
+				line-height: 100px;
+				cursor: pointer;
+			}
+			#droppable {
+				width: 200px;
+				height: 200px;
+				background-color: lightgray;
+				margin-top: 20px;
+				text-align: center;
+				line-height: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="draggable" draggable="true">Arrastrar</div>
+		<div id="droppable">Área de destino</div>
+		<button id="resetButton">Reiniciar Juego</button>
+
+		<script>
+			// Función para reiniciar el juego
+			function reiniciarJuego() {
+				// Volver a mostrar el elemento draggable
+				var draggableElement = document.getElementById("draggable");
+				draggableElement.style.display = "block";
+			}
+
+			// Evento de clic para el botón de reinicio
+			document
+				.getElementById("resetButton")
+				.addEventListener("click", reiniciarJuego);
+
+			// Evento de inicio de arrastre
+			document
+				.getElementById("draggable")
+				.addEventListener("dragstart", function (event) {
+					console.log("Comenzó el arrastre");
+				});
+
+			// Evento de finalización de arrastre
+			document
+				.getElementById("droppable")
+				.addEventListener("drop", function (event) {
+					console.log("Elemento soltado en el área de destino");
+
+					// Ocultar el elemento draggable al soltarlo en el droppable
+					var draggableElement = document.getElementById("draggable");
+					draggableElement.style.display = "none";
+				});
+
+			// Prevenir el comportamiento predeterminado
+			document.addEventListener("dragover", function (event) {
+				event.preventDefault();
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Eventos de Teclado en JavaScript</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				text-align: center;
+				padding-top: 50px;
+				background-color: #f0f0f0;
+			}
+			.container {
+				max-width: 600px;
+				margin: 0 auto;
+			}
+			.button {
+				padding: 10px 20px;
+				margin: 10px;
+				background-color: #007bff;
+				color: #fff;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Eventos de Teclado en JavaScript</h1>
+			<p>Presiona la tecla "Enter" para ver un mensaje en la consola.</p>
+			<p>Presiona la tecla "A" para cambiar el color de fondo a azul.</p>
+			<p>Suelta la tecla "B" para cambiar el color de fondo a amarillo.</p>
+			<button id="resetButton" class="button">Reiniciar</button>
+		</div>
+
+		<script>
+			// 1. Evento de pulsación de tecla "Enter"
+			document.addEventListener("keydown", function (event) {
+				if (event.key === "Enter") {
+					console.log("Tecla Enter presionada");
+				}
+			});
+
+			// 2. Evento de presionar la tecla "A"
+			document.addEventListener("keydown", function (event) {
+				if (event.key === "a" || event.key === "A") {
+					document.body.style.backgroundColor = "blue";
+				}
+			});
+
+			// 3. Evento de soltar la tecla "B"
+			document.addEventListener("keyup", function (event) {
+				if (event.key === "b" || event.key === "B") {
+					document.body.style.backgroundColor = "yellow";
+				}
+			});
+
+			// Reiniciar el color de fondo al hacer clic en el botón de reinicio
+			document
+				.getElementById("resetButton")
+				.addEventListener("click", function () {
+					document.body.style.backgroundColor = "#f0f0f0";
+				});
+		</script>
+	</body>
+</html>
